@@ -3,6 +3,8 @@ package club.boyuan.official.teammatching.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
+import java.io.Serial;
 import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;

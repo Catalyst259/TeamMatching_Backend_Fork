@@ -1,0 +1,94 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+      probes:
+        enabled: true
+
+spring:
+  application:
+    name: team-matching
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+
+  flyway:
+    enabled: true
+    clean-disabled: false
+    clean-on-validation-error: true
+    baseline-on-migrate: true
+    baseline-version: 1
+
+  mail:
+    enabled: false
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+      database: 0
+      timeout: 30000ms
+
+app:
+  environment: test
+
+aliyun:
+  oss:
+    enabled: false
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    access-key-id: test
+    access-key-secret: test
+    bucket-name: test
+    file-prefix: test/
+
+wechat:
+  miniapp:
+    appid: test_appid
+    secret: test_secret
+    enabled: false
+
+sms:
+  enabled: false
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: club.boyuan.official.teammatching.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+  configuration-properties:
+    page-size-zero: false
+
+logging:
+  level:
+    club.boyuan.official.teammatching.mapper: debug
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+    try-it-out-enabled: true
+    filter: true

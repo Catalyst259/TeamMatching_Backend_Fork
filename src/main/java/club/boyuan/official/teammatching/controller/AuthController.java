@@ -46,10 +46,10 @@ import java.util.Map;
 @RequestMapping("/auth")
 @Api(tags = "认证接口")
 @Validated
-@RequiredArgsConstructor
+@RequiredArgsConstructor // 自动生成构造器
 public class AuthController {
     
-
+    // Dependency Injection
     private final AuthService authService;
     
     /**
