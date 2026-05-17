@@ -33,6 +33,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,25 +59,20 @@ import java.util.Objects;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    
-    @Autowired
-    private UserMapper userMapper;
-    
-    @Autowired
-    private AuthMaterialMapper authMaterialMapper;
-    
-    @Autowired
-    private FileResourceMapper fileResourceMapper;
-    
-    @Autowired
-    private RedisUtils redisUtils;
-    
-    @Autowired
-    private EmailService emailService;
-    
-    @Autowired
-    private SmsService smsService;
+    // 修改为 @RequiredArgsConstructor + final 的写法
+    private final UserMapper userMapper;
+
+    private final AuthMaterialMapper authMaterialMapper;
+
+    private final FileResourceMapper fileResourceMapper;
+
+    private final RedisUtils redisUtils;
+
+    private final EmailService emailService;
+
+    private final SmsService smsService;
 
     @Value("${wechat.miniapp.appid}")
     private String appid;
@@ -313,6 +309,7 @@ public class AuthServiceImpl implements AuthService {
      * 创建用户对象
      */
     private User createUser(RegisterRequest registerRequest) {
+        // 这里可以直接 new，因为 user 不是全局共享的对象，不会有线程安全问题
         User user = new User();
         String account = registerRequest.getAccount();
         
